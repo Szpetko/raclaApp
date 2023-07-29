@@ -6,6 +6,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pl.raclacamp.raclaapp.app.RaclaApp
+import pl.raclacamp.raclaapp.data.repository.ArtistRepositoryImpl
+import pl.raclacamp.raclaapp.domain.repository.ArtistRepository
 import javax.inject.Singleton
 
 @Module
@@ -22,5 +24,11 @@ object AppModule {
     @Singleton
     fun providesFireStoreInstance(): FirebaseFirestore{
         return FirebaseFirestore.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun providesArtistRepository(db: FirebaseFirestore): ArtistRepository{
+        return ArtistRepositoryImpl(db)
     }
 }

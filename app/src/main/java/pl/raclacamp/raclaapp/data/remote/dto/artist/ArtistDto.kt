@@ -4,7 +4,7 @@ import com.google.firebase.Timestamp
 import pl.raclacamp.raclaapp.domain.model.Artist
 
 data class ArtistDto(
-    val id: Int,
+    val id: String,
     val name: String,
     val stage: String,
     val rank: Int,

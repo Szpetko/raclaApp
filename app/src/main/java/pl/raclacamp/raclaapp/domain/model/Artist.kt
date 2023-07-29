@@ -3,7 +3,7 @@ package pl.raclacamp.raclaapp.domain.model
 import com.google.firebase.Timestamp
 
 data class Artist(
-    val id: Int,
+    val id: String,
     val name: String,
     val stage: String,
     val imgLocation: String,
