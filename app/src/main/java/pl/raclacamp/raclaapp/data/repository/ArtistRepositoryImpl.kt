@@ -11,7 +11,6 @@ import pl.raclacamp.raclaapp.data.remote.dto.artist.ArtistDto
 import pl.raclacamp.raclaapp.data.remote.dto.artist.toArtist
 import pl.raclacamp.raclaapp.domain.model.Artist
 import pl.raclacamp.raclaapp.domain.repository.ArtistRepository
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 class ArtistRepositoryImpl @Inject constructor(
@@ -26,11 +25,46 @@ class ArtistRepositoryImpl @Inject constructor(
                 emit(Resource.Error("No values returned."))
                 Log.v("Repo", "No values returned")
             }
-            emit(Resource.Success(result.toObjects(ArtistDto::class.java).map { it.toArtist() }))
+            emit(Resource.Success(result.toObjects<ArtistDto>().map { it.toArtist() }))
         } catch (e: Exception) {
             emit(Resource.Error(e.toString()))
             Log.v("Repo", e.toString())
         }
+
+
+
+
+
+
+
+
+//        var list: List<Artist>
+//        try {
+//
+//
+////            val artistList = response.toObjects<ArtistDto>().map{ it.toArtist() }
+////            emit(Resource.Success(artistList))
+//        }catch (e: Exception){
+//            emit(Resource.Error(e.toString()))
+//        }
+
+
+//        val response = db.collection("artists")
+//            .get()
+//            .addOnSuccessListener { result ->
+////                    if(result != null){
+////                        result
+////                    } else {
+////                        throw NullPointerException()
+////                    }
+//                val artists = result.toObjects<ArtistDto>().map { it.toArtist() }
+//                list = artists
+//            }
+//            .addOnFailureListener { exception ->
+//                //Log.w(TAG, "Error getting documents.", exception)
+//                throw exception
+//            }
+//            .await()
 
 
     }
