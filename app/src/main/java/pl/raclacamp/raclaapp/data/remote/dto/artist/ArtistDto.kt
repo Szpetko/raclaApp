@@ -4,15 +4,16 @@ import com.google.firebase.Timestamp
 import pl.raclacamp.raclaapp.domain.model.Artist
 
 data class ArtistDto(
-    val id: String,
-    val name: String,
-    val stage: String,
-    val rank: Int,
-    val imgLocation: String,
-    val imgURL: String,
-    val dateOfPerformance: Timestamp,
-    val description: String
+    val id: String? = null,
+    val name: String? = null,
+    val stage: String? = null,
+    val rank: Double? = null,
+    val imgLocation: String? = null,
+    val imgURL: String? = null,
+    val dateOfPerformance: Timestamp? = null,
+    val description: String? = null
 )
+
 
 fun ArtistDto.toArtist(): Artist{
     return Artist(

@@ -1,5 +1,6 @@
 package pl.raclacamp.raclaapp.data.repository
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.flow.Flow
@@ -15,31 +16,23 @@ import javax.inject.Inject
 
 class ArtistRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore
-): ArtistRepository {
-    override suspend fun getArtistList(): Flow<Resource<List<Artist>>> =  flow {
+) : ArtistRepository {
+    override suspend fun getArtistList(): Flow<Resource<List<Artist>>> = flow {
         emit(Resource.Loading())
+
         try {
-            val response = db.collection("artists")
-                .get()
-                .addOnSuccessListener { result ->
-//                    if(result != null){
-//                        result
-//                    } else {
-//                        throw NullPointerException()
-//                    }
-                    val artists = result.toObjects<ArtistDto>().map { it.toArtist() }
-                    Resource.Success(artists)
-                }
-                .addOnFailureListener { exception ->
-                    //Log.w(TAG, "Error getting documents.", exception)
-                    throw exception
-                }
-                .await()
-//            val artistList = response.toObjects<ArtistDto>().map{ it.toArtist() }
-//            emit(Resource.Success(artistList))
-        }catch (e: Exception){
+            val result = db.collection("artists").get().await()
+            require(!result.isEmpty) {
+                emit(Resource.Error("No values returned."))
+                Log.v("Repo", "No values returned")
+            }
+            emit(Resource.Success(result.toObjects(ArtistDto::class.java).map { it.toArtist() }))
+        } catch (e: Exception) {
             emit(Resource.Error(e.toString()))
+            Log.v("Repo", e.toString())
         }
+
+
     }
 
 

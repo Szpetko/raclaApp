@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             getArtistList().collect(){
                 response ->
-                Log.v("home", response.toString())
+                Log.v("home", response.data.toString())
             }
         }
     }
