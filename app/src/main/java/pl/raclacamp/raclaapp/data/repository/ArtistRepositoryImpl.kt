@@ -18,7 +18,6 @@ class ArtistRepositoryImpl @Inject constructor(
 ) : ArtistRepository {
     override suspend fun getArtistList(): Flow<Resource<List<Artist>>> = flow {
         emit(Resource.Loading())
-
         try {
             val result = db.collection("artists").get().await()
             require(!result.isEmpty) {
@@ -30,43 +29,6 @@ class ArtistRepositoryImpl @Inject constructor(
             emit(Resource.Error(e.toString()))
             Log.v("Repo", e.toString())
         }
-
-
-
-
-
-
-
-
-//        var list: List<Artist>
-//        try {
-//
-//
-////            val artistList = response.toObjects<ArtistDto>().map{ it.toArtist() }
-////            emit(Resource.Success(artistList))
-//        }catch (e: Exception){
-//            emit(Resource.Error(e.toString()))
-//        }
-
-
-//        val response = db.collection("artists")
-//            .get()
-//            .addOnSuccessListener { result ->
-////                    if(result != null){
-////                        result
-////                    } else {
-////                        throw NullPointerException()
-////                    }
-//                val artists = result.toObjects<ArtistDto>().map { it.toArtist() }
-//                list = artists
-//            }
-//            .addOnFailureListener { exception ->
-//                //Log.w(TAG, "Error getting documents.", exception)
-//                throw exception
-//            }
-//            .await()
-
-
     }
 
 
