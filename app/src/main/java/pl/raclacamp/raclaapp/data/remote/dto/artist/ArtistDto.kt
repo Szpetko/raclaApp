@@ -22,7 +22,7 @@ fun ArtistDto.toArtist(): Artist{
         id = id,
         name = name,
         stage = stage,
-        imgLocation = imgLocation,
+        imgURL = imgURL,
         dateOfPerformance = dateOfPerformance,
         description = description
     )

@@ -1,4 +1,4 @@
-package pl.raclacamp.raclaapp.presentation.home
+package pl.raclacamp.raclaapp.presentation.artists
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -8,12 +8,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import pl.raclacamp.raclaapp.app.common.Resource
 import pl.raclacamp.raclaapp.domain.usecase.artist.GetArtistList
-import pl.raclacamp.raclaapp.presentation.artists.ArtistListState
 import javax.inject.Inject
 
-
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class ArtistsViewModel @Inject constructor(
     private val getArtistList: GetArtistList
 ) : ViewModel() {
 
@@ -49,5 +47,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
 }

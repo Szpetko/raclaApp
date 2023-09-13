@@ -29,16 +29,16 @@ fun MainScreen(
 @Composable
 fun BottomBar(navController: NavController) {
     val screens = listOf(
-        BottomBarScreens.Maps,
+//        BottomBarScreens.Maps,
         BottomBarScreens.Artists,
         BottomBarScreens.Home,
-        BottomBarScreens.News,
+//        BottomBarScreens.News,
         BottomBarScreens.Favorites
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    if (screens.any(){it.route == currentDestination?.route}){
+    if (screens.any() { it.route == currentDestination?.route }) {
         NavigationBar {
             screens.forEach { screen ->
                 AddItem(
@@ -71,7 +71,7 @@ fun RowScope.AddItem(
             it.route == screen.route
         } == true,
         onClick = {
-            navController.navigate(screen.route){
+            navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id)
                 launchSingleTop = true
             }
